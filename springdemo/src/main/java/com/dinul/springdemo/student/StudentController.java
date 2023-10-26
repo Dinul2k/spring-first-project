@@ -1,9 +1,12 @@
 package com.dinul.springdemo.student;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -11,11 +14,15 @@ import java.util.List;
 public class StudentController {
 
 
+
+    private StudentService service ;
+
+    public StudentController(StudentService service) {
+        this.service = service;
+    }
+
     @GetMapping
-    public List<String> findAllStudents(){
-        return List.of(
-                "Dinul",
-                "Hello World!"
-        );
+    public List<Student> findAllStudents(){
+        return service.findAllStudents();
     }
 }
